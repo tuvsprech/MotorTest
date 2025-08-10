@@ -15,7 +15,7 @@ public class FAkeMotor extends BaseMotor {
         double motorSpeed = rpm / MaxRPM;
         setSpeed(motorSpeed);
     }
-    
+    // comment
     public void updateCurrentRPM(double rpm) {
         currentRPM = rpm;
     }
