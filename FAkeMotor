@@ -1,0 +1,32 @@
+public class FAkeMotor extends BaseMotor {
+    private double targetRPM;
+    private double currentRPM;
+    private final double MaxRPM = 6000; // rpm
+    private final double MaxError = 50; // rpm
+    // constructor
+    public FAkemotor(String motorName) {
+        super(motorName, 1.0);
+        targetRPM = 0.0;
+        currentRPM = 0.0;
+    }
+    
+    public void setTargetRPM(double rpm) {
+        targetRPM = rpm;
+        double motorSpeed = rpm / MaxRPM;
+        setSpeed(motorSpeed);
+    }
+    
+    public void updateCurrentRPM(double rpm) {
+        currentRPM = rpm;
+    }
+    
+    public boolean isReadyToShoot() {
+        return Math.abs(currentRPM - targetRPM) < MaxError && targetRPM > 0;
+    }
+    
+    @Override
+    public void stop() {
+        this.targetRPM = 0.0;
+        super.stop(); // calls parent class stop method to stop the motor
+    }
+}
